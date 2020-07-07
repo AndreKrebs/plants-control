@@ -2,7 +2,7 @@
     <string name="main_page_title_form">Controle de plantas e pragas</string>
 
     <string name="app_name">Plants Control</string>
-    <string name="add_new_pest">Cadastrar nova praga</string>
+    <string name="add_new_pest">Cadastrar praga</string>
     <string name="button_save">Salvar</string>
     <string name="clean_form">Limpar formulário</string>
 </resources>
