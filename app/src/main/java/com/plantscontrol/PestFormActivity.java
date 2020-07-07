@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -16,6 +17,7 @@ public class PestFormActivity extends AppCompatActivity {
     private Spinner spinnerWeather;
     private RadioGroup radioGroupPestType;
     private CheckBox checkBoxSlow, checkBoxModerate, checkBoxFast;
+    private EditText editTextPopularName, editTextScientificName, editTextPestDescription, editTexControlMethodsDescription;
 
 
     @Override
@@ -29,6 +31,11 @@ public class PestFormActivity extends AppCompatActivity {
         checkBoxSlow = findViewById(R.id.checkBoxSlow);
         checkBoxModerate = findViewById(R.id.checkBoxModerate);
         checkBoxFast = findViewById(R.id.checkBoxFast);
+
+        editTextPopularName = findViewById(R.id.editTextPopularName);
+        editTextScientificName = findViewById(R.id.editTextScientificName);
+        editTextPestDescription = findViewById(R.id.editTextPestDescription);
+        editTexControlMethodsDescription = findViewById(R.id.editTexControlMethodsDescription);
 
         optionsSpinnerWeather();
     }
@@ -64,5 +71,12 @@ public class PestFormActivity extends AppCompatActivity {
         checkBoxSlow.setChecked(false);
         checkBoxModerate.setChecked(false);
         checkBoxFast.setChecked(false);
+
+        editTextPopularName.setText(null);
+        editTextScientificName.setText(null);
+        editTextPestDescription.setText(null);
+        editTexControlMethodsDescription.setText(null);
+
+        editTextPopularName.requestFocus();
     }
 }
