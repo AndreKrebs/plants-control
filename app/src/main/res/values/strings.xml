@@ -3,6 +3,7 @@
 
     <string name="app_name">Plants Control</string>
     <string name="add_new_pest">Cadastrar praga</string>
+    <string name="list_pest">Listar pragas</string>
     <string name="button_save">Salvar</string>
     <string name="clean_form">Limpar formulário</string>
 </resources>

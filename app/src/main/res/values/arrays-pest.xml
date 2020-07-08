@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="popular_name">
+        <item>Pulgão</item>
+        <item>Cochonilha</item>
+        <item>Ferrugem</item>
+        <item>Formiga carregadeira</item>
+        <item>Abelha Arapuã</item>
+        <item>Lesma</item>
+        <item>Lagarta</item>
+        <item>Caracol</item>
+        <item>Oídio</item>
+        <item>Míldio</item>
+    </string-array>
+
+    <string-array name="scientific_name">
+        <item>Aphidoidea</item>
+        <item>Dactylopius coccus</item>
+        <item>Phakopsora pachyrhizi</item>
+        <item>Atta sexdens</item>
+        <item>Trigona spinipes</item>
+        <item>Veronicellidae</item>
+        <item>Agrotis ípsilon</item>
+        <item>Cochleolus</item>
+        <item>Oidium</item>
+        <item>Plasmopara viticola</item>
+    </string-array>
+
+    <string-array name="pest_type">
+        <item>Inseto</item>
+        <item>Inseto</item>
+        <item>Fungo</item>
+        <item>Inseto</item>
+        <item>Inseto</item>
+        <item>Molusco</item>
+        <item>Inseto</item>
+        <item>Molusco</item>
+        <item>Fungo</item>
+        <item>Fungo</item>
+    </string-array>
+
+    <string-array name="weather">
+        <item>@string/tropical</item>
+        <item>@string/temperate</item>
+        <item>@string/tropical</item>
+        <item>@string/tropical</item>
+        <item>@string/temperate</item>
+        <item>@string/tropical</item>
+        <item>@string/tropical</item>
+        <item>@string/temperate</item>
+        <item>@string/tropical</item>
+        <item>@string/tropical</item>
+    </string-array>
+    
+</resources>

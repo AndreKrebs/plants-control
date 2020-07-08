@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal">
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="213dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewCustomPopularName"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textViewCustomType"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewCustomScientificName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textViewCustomWeather"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>
