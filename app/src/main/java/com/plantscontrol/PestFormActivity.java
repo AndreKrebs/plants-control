@@ -7,9 +7,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import 	java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class PestFormActivity extends AppCompatActivity {
@@ -36,6 +40,8 @@ public class PestFormActivity extends AppCompatActivity {
         editTextScientificName = findViewById(R.id.editTextScientificName);
         editTextPestDescription = findViewById(R.id.editTextPestDescription);
         editTexControlMethodsDescription = findViewById(R.id.editTexControlMethodsDescription);
+
+        radioGroupPestType = findViewById(R.id.radioGroupPestType);
 
         optionsSpinnerWeather();
     }
@@ -78,5 +84,58 @@ public class PestFormActivity extends AppCompatActivity {
         editTexControlMethodsDescription.setText(null);
 
         editTextPopularName.requestFocus();
+
+        Toast.makeText(this, "Formulário limpo!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void saveForm(View view) {
+
+        if (editTextPopularName.getText().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.popular_name_pest) +"` é obrigatório");
+            editTextPopularName.requestFocus();
+            return;
+        }
+        if (editTextScientificName.getText().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.scientific_name_pest) +"` é obrigatório");
+            editTextScientificName.requestFocus();
+            return;
+        }
+        if (radioGroupPestType.getCheckedRadioButtonId() == -1) {
+            showToastFailSave("Selecione uma opção em `"+ getString(R.string.pest_type) +"`");
+            radioGroupPestType.requestFocus();
+            return;
+        }
+        if (editTextPestDescription.getText().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.pest_description) +"` é obrigatório");
+            editTextPestDescription.requestFocus();
+            return;
+        }
+        if (editTextScientificName.getText().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.scientific_name_pest) +"` é obrigatório");
+            editTextScientificName.requestFocus();
+            return;
+        }
+        if (!checkBoxSlow.isChecked() && !checkBoxModerate.isChecked() && !checkBoxFast.isChecked()) {
+            showToastFailSave("Selecione ao menos uma opção em `"+ getString(R.string.pest_propagation_speed) +"` é obrigatório");
+            checkBoxSlow.requestFocus();
+            return;
+        }
+        if (spinnerWeather.getSelectedItem().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.pest_ideal_weather_propagation) +"` é obrigatório");
+            checkBoxSlow.requestFocus();
+            return;
+        }
+        if (editTexControlMethodsDescription.getText().toString().equals("")) {
+            showToastFailSave("Campo `"+ getString(R.string.pest_control_description) +"` é obrigatório");
+            editTextPestDescription.requestFocus();
+            return;
+        }
+
+        showToastFailSave("Formulário salvo com sucesso");
+    }
+
+    private void showToastFailSave(String msg) {
+        if (!msg.equals(""))
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
