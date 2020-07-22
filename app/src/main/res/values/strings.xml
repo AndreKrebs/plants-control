@@ -6,4 +6,5 @@
     <string name="list_pest">Listar pragas</string>
     <string name="button_save">Salvar</string>
     <string name="clean_form">Limpar formulário</string>
+    <string name="button_authorship">Autoria</string>
 </resources>

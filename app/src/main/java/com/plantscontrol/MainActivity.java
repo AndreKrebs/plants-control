@@ -20,8 +20,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void opemListPest(View view) {
+    public void openListPest(View view) {
         Intent intent = new Intent(this, PestListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openActivityAuthorship(View view) {
+        Intent intent = new Intent(this, AuthorshipActivity.class);
         startActivity(intent);
     }
 
