@@ -1,7 +1,6 @@
 package com.plantscontrol;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,10 +9,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import 	java.lang.reflect.Field;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.plantscontrol.entity.Pest;
+
 import java.util.ArrayList;
 
 public class PestFormActivity extends AppCompatActivity {
@@ -131,7 +132,36 @@ public class PestFormActivity extends AppCompatActivity {
             return;
         }
 
-        showToastFailSave("Formulário salvo com sucesso");
+        Pest pest = new Pest();
+
+        String velocity = "";
+
+        if (checkBoxSlow.isChecked())
+            velocity = checkBoxSlow.getText().toString();
+        else if (checkBoxModerate.isChecked())
+            velocity = checkBoxModerate.getText().toString();
+        else if (checkBoxFast.isChecked())
+            velocity = checkBoxFast.getText().toString();
+        pest.setVelocity(velocity);
+
+        int radioButtonID = radioGroupPestType.getCheckedRadioButtonId();
+        RadioButton radioButton = radioGroupPestType.findViewById(radioButtonID);
+        pest.setType(radioButton.getText().toString());
+
+        pest.setMethodsDescription(editTexControlMethodsDescription.getText().toString());
+        pest.setScientificName(editTextScientificName.getText().toString());
+        pest.setWeather(spinnerWeather.getSelectedItem().toString());
+        pest.setPopularName(editTextPopularName.getText().toString());
+        pest.setDescription(editTextPestDescription.getText().toString());
+
+        saveSuccessForm(pest);
+    }
+
+    private void saveSuccessForm(Pest pest) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("newPest", pest);
+        setResult(RESULT_OK, returnIntent);
+        finish();
     }
 
     private void showToastFailSave(String msg) {

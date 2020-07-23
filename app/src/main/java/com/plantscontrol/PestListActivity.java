@@ -1,13 +1,15 @@
 package com.plantscontrol;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.adapter.PestListAdapter;
 import com.plantscontrol.entity.Pest;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PestListActivity extends AppCompatActivity {
+
+    static final int ACTIVITY_FORM_REQUEST = 1;
 
     private ListView listViewPests;
 
@@ -56,9 +60,27 @@ public class PestListActivity extends AppCompatActivity {
 
         PestListAdapter adapter = new PestListAdapter(pests, this);
 
+        ViewGroup footer = (ViewGroup) getLayoutInflater().inflate(R.layout.custom_pest_footer_list, listViewPests, false);
+
+        listViewPests.addFooterView(footer);
         listViewPests.setAdapter(adapter);
 
     }
 
+    public void openFormNewPest(View view) {
+        Intent intent = new Intent(PestListActivity.this, PestFormActivity.class);
+        startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ACTIVITY_FORM_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Pest pest = (Pest) data.getSerializableExtra("newPest");
+                Toast.makeText(this, pest.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

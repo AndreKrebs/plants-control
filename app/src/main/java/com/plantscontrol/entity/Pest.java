@@ -1,10 +1,15 @@
 package com.plantscontrol.entity;
 
-public class Pest {
+import java.io.Serializable;
+
+public class Pest implements Serializable {
     private String popularName;
     private String scientificName;
     private String type;
     private String weather;
+    private String description;
+    private String velocity;
+    private String methodsDescription;
 
     public Pest(String popularName, String scientificName, String type, String weather) {
         setPopularName(popularName);
@@ -12,6 +17,19 @@ public class Pest {
         setType(type);
         setWeather(weather);
     }
+
+
+    public Pest(String popularName, String scientificName, String type, String weather, String description, String velocity, String methodsDescription) {
+        this.popularName = popularName;
+        this.scientificName = scientificName;
+        this.type = type;
+        this.weather = weather;
+        this.description = description;
+        this.velocity = velocity;
+        this.methodsDescription = methodsDescription;
+    }
+
+    public Pest(){}
 
     public String getPopularName() {
         return popularName;
@@ -43,6 +61,30 @@ public class Pest {
 
     public void setWeather(String weather) {
         this.weather = weather;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(String velocity) {
+        this.velocity = velocity;
+    }
+
+    public String getMethodsDescription() {
+        return methodsDescription;
+    }
+
+    public void setMethodsDescription(String methodsDescription) {
+        this.methodsDescription = methodsDescription;
     }
 
     @Override

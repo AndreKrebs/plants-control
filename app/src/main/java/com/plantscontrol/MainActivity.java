@@ -12,12 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.main_page_title_form);
-    }
-
-    public void openFormPest(View view) {
-        Intent intent = new Intent(this, PestFormActivity.class);
-        startActivity(intent);
+        setTitle(R.string.main_page_title_form);    
     }
 
     public void openListPest(View view) {
