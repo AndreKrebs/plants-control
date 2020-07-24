@@ -16,14 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.plantscontrol.entity.Pest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PestFormActivity extends AppCompatActivity {
+
+    public static final String NEW_PEST = "NEW-PEST";
 
     private Spinner spinnerWeather;
     private RadioGroup radioGroupPestType;
     private CheckBox checkBoxSlow, checkBoxModerate, checkBoxFast;
     private EditText editTextPopularName, editTextScientificName, editTextPestDescription, editTexControlMethodsDescription;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class PestFormActivity extends AppCompatActivity {
         editTexControlMethodsDescription = findViewById(R.id.editTexControlMethodsDescription);
 
         radioGroupPestType = findViewById(R.id.radioGroupPestType);
+
 
         optionsSpinnerWeather();
     }
@@ -69,6 +72,12 @@ public class PestFormActivity extends AppCompatActivity {
                 list);
 
         spinnerWeather.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
     }
 
     public void clearForm(View view) {
@@ -159,7 +168,7 @@ public class PestFormActivity extends AppCompatActivity {
 
     private void saveSuccessForm(Pest pest) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("newPest", pest);
+        returnIntent.putExtra(NEW_PEST, pest);
         setResult(RESULT_OK, returnIntent);
         finish();
     }

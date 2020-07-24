@@ -5,10 +5,17 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/buttonNovo"
+        android:id="@+id/buttonNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="openFormNewPest"
         android:text="@string/new_register" />
+
+    <Button
+        android:id="@+id/buttonAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openActivityAuthorship"
+        android:text="@string/button_authorship" />
 
 </LinearLayout>
