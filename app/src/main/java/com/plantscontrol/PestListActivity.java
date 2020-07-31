@@ -2,13 +2,16 @@ package com.plantscontrol;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +53,8 @@ public class PestListActivity extends AppCompatActivity {
         });
 
          setItensList();
+
+         registerForContextMenu(listViewPests);
     }
 
     @Override
@@ -64,20 +69,15 @@ public class PestListActivity extends AppCompatActivity {
     private void setItensList() {
         adapterList = new PestListAdapter(pestList, this);
 
-        if (footer == null) {
-            footer = (ViewGroup) getLayoutInflater().inflate(R.layout.custom_pest_footer_list, listViewPests, false);
-            listViewPests.addFooterView(footer);
-        }
-
         listViewPests.setAdapter(adapterList);
     }
 
-    public void openFormNewPest(View view) {
+    public void openFormNewPest() {
         Intent intent = new Intent(PestListActivity.this, PestFormActivity.class);
         startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
     }
 
-    public void openActivityAuthorship(View view) {
+    public void openAuthorship() {
         Intent intent = new Intent(PestListActivity.this, AuthorshipActivity.class);
         intent.putExtra("LIST_PEST", (Serializable) pestList);
         startActivityForResult(intent, ACTIVITY_AUTHORSHIP_REQUEST);
@@ -111,5 +111,36 @@ public class PestListActivity extends AppCompatActivity {
 
     private void showToastLong(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_pests, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItemAdd:
+                openFormNewPest();
+                return true;
+
+            case R.id.menuItemAbout:
+                openAuthorship();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.menu_pests_list_context, menu);
     }
 }

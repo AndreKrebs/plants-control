@@ -15,7 +15,7 @@
         android:id="@+id/buttonAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="openActivityAuthorship"
+        android:onClick="openAuthorship"
         android:text="@string/button_authorship" />
 
 </LinearLayout>
