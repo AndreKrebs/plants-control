@@ -9,11 +9,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.entity.Pest;
+import com.plantscontrol.entity.enums.PestTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,14 @@ import java.util.List;
 public class PestFormActivity extends AppCompatActivity {
 
     public static final String NEW_PEST = "NEW-PEST";
+    public static final String EDIT_PEST = "EDIT-PEST";
 
     private Spinner spinnerWeather;
     private RadioGroup radioGroupPestType;
     private CheckBox checkBoxSlow, checkBoxModerate, checkBoxFast;
     private EditText editTextPopularName, editTextScientificName, editTextPestDescription, editTexControlMethodsDescription;
+    private Pest editPest;
+    private String valueRadioButtonSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,30 @@ public class PestFormActivity extends AppCompatActivity {
 
 
         optionsSpinnerWeather();
+
+        checkExistsItemToEdit();
+    }
+
+    private void checkExistsItemToEdit() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            editPest = (Pest) bundle.getSerializable(PestListActivity.ITEM_PEST);
+
+            populateFormFromObject(editPest);
+
+        }
+    }
+
+    private void populateFormFromObject(Pest pest) {
+        editTextPopularName.setText(pest.getPopularName(), TextView.BufferType.EDITABLE);
+        editTextScientificName.setText(pest.getScientificName(), TextView.BufferType.EDITABLE);
+        editTextPestDescription.setText(pest.getDescription());
+        editTexControlMethodsDescription.setText(pest.getMethodsDescription());
+
+        setRadioButtonPestType(pest.getType());
+        // TODO: falta campos checkbox e selectbox
     }
 
     private void optionsSpinnerWeather() {
@@ -153,9 +182,7 @@ public class PestFormActivity extends AppCompatActivity {
             velocity = checkBoxFast.getText().toString();
         pest.setVelocity(velocity);
 
-        int radioButtonID = radioGroupPestType.getCheckedRadioButtonId();
-        RadioButton radioButton = radioGroupPestType.findViewById(radioButtonID);
-        pest.setType(radioButton.getText().toString());
+        pest.setType(this.valueRadioButtonSelected);
 
         pest.setMethodsDescription(editTexControlMethodsDescription.getText().toString());
         pest.setScientificName(editTextScientificName.getText().toString());
@@ -176,5 +203,49 @@ public class PestFormActivity extends AppCompatActivity {
     private void showToastFailSave(String msg) {
         if (!msg.equals(""))
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public void clickRadioButtonPestType(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.radioButtonPestTypeInsect:
+                if (checked)
+                    valueRadioButtonSelected = PestTypeEnum.valueOf("INSECT").getType();
+                break;
+            case R.id.radioButtonPestTypeFungus:
+                if (checked)
+                    valueRadioButtonSelected = PestTypeEnum.valueOf("FUNGUS").getType();
+                break;
+            case R.id.radioButtonPestTypeVirus:
+                if (checked)
+                    valueRadioButtonSelected = PestTypeEnum.valueOf("VIRUS").getType();
+                break;
+            default:
+                valueRadioButtonSelected = "";
+                break;
+        }
+    }
+
+    private void setRadioButtonPestType(String value) {
+
+        RadioButton b;
+
+        if (PestTypeEnum.valueOf("INSECT").getType().equals(value)) {
+            b = (RadioButton) findViewById(R.id.radioButtonPestTypeInsect);
+            b.setChecked(true);
+            return;
+        }
+        if (PestTypeEnum.valueOf("FUNGUS").getType().equals(value)) {
+            b = (RadioButton) findViewById(R.id.radioButtonPestTypeFungus);
+            b.setChecked(true);
+            return;
+        }
+        if (PestTypeEnum.valueOf("VIRUS").getType().equals(value)) {
+            b = (RadioButton) findViewById(R.id.radioButtonPestTypeVirus);
+            b.setChecked(true);
+            return;
+        }
+
     }
 }

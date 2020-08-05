@@ -28,7 +28,7 @@ public class AuthorshipActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
-            pestList = (List<Pest>) bundle.getSerializable("LIST_PEST");
+            pestList = (List<Pest>) bundle.getSerializable(PestListActivity.PEST_LIST);
         }
     }
 

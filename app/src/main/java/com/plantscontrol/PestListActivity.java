@@ -27,6 +27,7 @@ public class PestListActivity extends AppCompatActivity {
     private static final int ACTIVITY_FORM_REQUEST = 1;
     private static final int ACTIVITY_AUTHORSHIP_REQUEST = 2;
     public static final String PEST_LIST = "LIST-PEST";
+    public static final String ITEM_PEST = "ITEM-PEST";
 
     private ListView listViewPests;
     private ViewGroup footer;
@@ -61,7 +62,7 @@ public class PestListActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("PEST-LIST", (Serializable) pestList);
+        returnIntent.putExtra(PEST_LIST, (Serializable) pestList);
         setResult(RESULT_OK, returnIntent);
         finish();
     }
@@ -77,9 +78,18 @@ public class PestListActivity extends AppCompatActivity {
         startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
     }
 
+
+    private void openFormEditPest(Pest pest) {
+        Intent intent = new Intent(PestListActivity.this, PestFormActivity.class);
+//        intent.putExtra(PEST_LIST, )
+        intent.putExtra(ITEM_PEST, (Serializable) pest);
+        startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
+
+    }
+
     public void openAuthorship() {
         Intent intent = new Intent(PestListActivity.this, AuthorshipActivity.class);
-        intent.putExtra("LIST_PEST", (Serializable) pestList);
+        intent.putExtra(PEST_LIST, (Serializable) pestList);
         startActivityForResult(intent, ACTIVITY_AUTHORSHIP_REQUEST);
     }
 
@@ -142,5 +152,35 @@ public class PestListActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.menu_pests_list_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info;
+
+        info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch(item.getItemId()) {
+            case R.id.menuItemEdit:
+                editItemPest(info.position);
+                return true;
+            case R.id.menuItemDelete:
+                deleteItemPest(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+    }
+
+    private void editItemPest(int position) {
+        Pest pest = pestList.get(position);
+        openFormEditPest(pest);
+    }
+
+    private void deleteItemPest(int position) {
+        pestList.remove(position);
+        adapterList.notifyDataSetChanged();
     }
 }

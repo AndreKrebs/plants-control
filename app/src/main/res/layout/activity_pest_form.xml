@@ -92,21 +92,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4">
 
                 <RadioButton
-                    android:id="@+id/radioButton4"
+                    android:id="@+id/radioButtonPestTypeInsect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="clickRadioButtonPestType"
                     android:text="@string/pest_type_insect" />
 
                 <RadioButton
-                    android:id="@+id/radioButton5"
+                    android:id="@+id/radioButtonPestTypeFungus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="clickRadioButtonPestType"
                     android:text="@string/pest_type_fungus" />
 
                 <RadioButton
-                    android:id="@+id/radioButton6"
+                    android:id="@+id/radioButtonPestTypeVirus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="clickRadioButtonPestType"
                     android:text="@string/pest_type_virus" />
             </RadioGroup>
 
