@@ -1,12 +1,12 @@
 <resources>
-    <string name="equatorial">Equatorial</string>
-    <string name="tropical">Tropical</string>
-    <string name="subtropical">Subtropical</string>
-    <string name="desert">Desértico</string>
-    <string name="temperate">Temperado</string>
-    <string name="mediterranean">Mediterrâneo</string>
-    <string name="semi_arid">Semiárido</string>
-    <string name="continental_arid">Continental árido</string>
-    <string name="mountain_cold">Frio da montanha</string>
-    <string name="polar">Polar</string>
+    <string name="EQUATORIAL">Equatorial</string>
+    <string name="TROPICAL">Tropical</string>
+    <string name="SUBTROPICAL">Subtropical</string>
+    <string name="DESERT">Desértico</string>
+    <string name="TEMPERATE">Temperado</string>
+    <string name="MEDITERRANEAN">Mediterrâneo</string>
+    <string name="SEMI_ARID">Semiárido</string>
+    <string name="CONTINENTAL_ARID">Continental árido</string>
+    <string name="MOUNTAIN_COLD">Frio da montanha</string>
+    <string name="POLAR">Polar</string>
 </resources>

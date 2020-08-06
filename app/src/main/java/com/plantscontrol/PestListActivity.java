@@ -6,7 +6,6 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,7 +29,6 @@ public class PestListActivity extends AppCompatActivity {
     public static final String ITEM_PEST = "ITEM-PEST";
 
     private ListView listViewPests;
-    private ViewGroup footer;
     private PestListAdapter adapterList;
 
     private List<Pest> pestList;
@@ -53,9 +51,9 @@ public class PestListActivity extends AppCompatActivity {
             }
         });
 
-         setItensList();
+        setItensList();
 
-         registerForContextMenu(listViewPests);
+        registerForContextMenu(listViewPests);
     }
 
     @Override
@@ -105,8 +103,15 @@ public class PestListActivity extends AppCompatActivity {
                     pestList.add(pest);
                     adapterList.notifyDataSetChanged();
                     showToastLong("Cadastro realizado com sucesso!");
+                } else {
+                    pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
+                    pestList.set(pest.getId().intValue(), pest);
+                    adapterList.notifyDataSetChanged();
+                    showToastLong("Registro atualizado com sucesso!");
                 }
 
+                if(pest == null)
+                    showToastLong("ERRO: Não foi possivel atualizar a lista");
 
             }
         } else if(requestCode == ACTIVITY_AUTHORSHIP_REQUEST) {
@@ -176,6 +181,7 @@ public class PestListActivity extends AppCompatActivity {
 
     private void editItemPest(int position) {
         Pest pest = pestList.get(position);
+        pest.setId((long) position);
         openFormEditPest(pest);
     }
 

@@ -3,6 +3,7 @@ package com.plantscontrol.entity;
 import java.io.Serializable;
 
 public class Pest implements Serializable {
+    private Long id;
     private String popularName;
     private String scientificName;
     private String type;
@@ -11,7 +12,7 @@ public class Pest implements Serializable {
     private String velocity;
     private String methodsDescription;
 
-    public Pest(String popularName, String scientificName, String type, String weather) {
+    /*public Pest(String popularName, String scientificName, String type, String weather) {
         setPopularName(popularName);
         setScientificName(scientificName);
         setType(type);
@@ -27,9 +28,17 @@ public class Pest implements Serializable {
         this.description = description;
         this.velocity = velocity;
         this.methodsDescription = methodsDescription;
-    }
+    }*/
 
     public Pest(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getPopularName() {
         return popularName;
