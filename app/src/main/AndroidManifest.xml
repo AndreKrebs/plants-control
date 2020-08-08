@@ -17,10 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PestFormActivity" />
-<!--        <activity android:name=".MainActivity">-->
-<!--            -->
-<!--        </activity>-->
+        <activity android:name=".PestFormActivity"
+            android:parentActivityName=".PestListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PestListActivity">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>

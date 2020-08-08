@@ -2,6 +2,8 @@ package com.plantscontrol;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -12,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.entity.Pest;
@@ -56,6 +60,9 @@ public class PestFormActivity extends AppCompatActivity {
 
         radioGroupPestType = findViewById(R.id.radioGroupPestType);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
         optionsSpinnerWeather();
 
@@ -86,8 +93,6 @@ public class PestFormActivity extends AppCompatActivity {
     }
 
     private void optionsSpinnerWeather() {
-
-
         listWeatherOptions.add("");
         List<PestWeatherEnum> weatherOptionsList = Arrays.asList(PestWeatherEnum.values());
 
@@ -115,7 +120,7 @@ public class PestFormActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
     }
 
-    public void clearForm(View view) {
+    public void clearForm() {
         radioGroupPestType.clearCheck();
         spinnerWeather.setSelection(0);
 
@@ -133,8 +138,7 @@ public class PestFormActivity extends AppCompatActivity {
         Toast.makeText(this, "Formulário limpo!", Toast.LENGTH_SHORT).show();
     }
 
-    public void saveForm(View view) {
-
+    public void saveForm() {
         if (editTextPopularName.getText().toString().equals("")) {
             showToastFailSave("Campo `"+ getString(R.string.popular_name_pest) +"` é obrigatório");
             editTextPopularName.requestFocus();
@@ -233,26 +237,23 @@ public class PestFormActivity extends AppCompatActivity {
     }
 
     private void setRadioButtonPestType(String value) {
-
         if (PestTypeEnum.valueOf("INSECT").getType().equals(value)) {
             ((RadioButton) findViewById(R.id.radioButtonPestTypeInsect)).setChecked(true);
+            valueRadioButtonPestTypeSelected = PestTypeEnum.valueOf("INSECT").getType();
             return;
         }
         if (PestTypeEnum.valueOf("FUNGUS").getType().equals(value)) {
             ((RadioButton) findViewById(R.id.radioButtonPestTypeFungus)).setChecked(true);
+            valueRadioButtonPestTypeSelected = PestTypeEnum.valueOf("FUNGUS").getType();
             return;
         }
         if (PestTypeEnum.valueOf("VIRUS").getType().equals(value)) {
             ((RadioButton) findViewById(R.id.radioButtonPestTypeVirus)).setChecked(true);
+            valueRadioButtonPestTypeSelected = PestTypeEnum.valueOf("VIRUS").getType();
             return;
         }
     }
 
-    /**
-     * Por enquanto método garante que apenas uma opção seja selecionada
-     *
-     * @param view
-     */
     public void clickCheckboxPropagationSpeed(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         String selectedValue = "";
@@ -292,22 +293,51 @@ public class PestFormActivity extends AppCompatActivity {
     }
 
     private void setCheckboxPropagationSpeed(String value) {
-
         if (PestPropagationSpeedEnum.valueOf("FAST").getPropagationSpeed().equals(value)) {
             ((CheckBox) findViewById(R.id.checkBoxFast)).setChecked(true);
+            valueCheckboxPropagationSpeedSelected = PestPropagationSpeedEnum.valueOf("FAST").getPropagationSpeed();
             return;
         }
+
         if (PestPropagationSpeedEnum.valueOf("MODERATE").getPropagationSpeed().equals(value)) {
             ((CheckBox) findViewById(R.id.checkBoxModerate)).setChecked(true);
+            valueCheckboxPropagationSpeedSelected = PestPropagationSpeedEnum.valueOf("MODERATE").getPropagationSpeed();
             return;
         }
+
         if (PestPropagationSpeedEnum.valueOf("SLOW").getPropagationSpeed().equals(value)) {
             ((CheckBox) findViewById(R.id.checkBoxSlow)).setChecked(true);
+            valueCheckboxPropagationSpeedSelected = PestPropagationSpeedEnum.valueOf("SLOW").getPropagationSpeed();
             return;
         }
     }
 
     private void setSpinnerWeather(String value) {
         spinnerWeather.setSelection(listWeatherOptions.indexOf(value));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItemSaveForm:
+                saveForm();
+                return true;
+            case R.id.menuItemCleanForm:
+                clearForm();
+                return true;
+            case android.R.id.home :
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_form_pests, menu);
+
+        return true;
     }
 }
