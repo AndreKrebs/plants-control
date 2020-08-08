@@ -45,7 +45,7 @@ public class PestFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pest_form);
-        setTitle(R.string.pest_page_title_form);
+        setTitle(R.string.pest_form_page_title);
 
         spinnerWeather = findViewById(R.id.spinnerWeather);
 
@@ -99,7 +99,7 @@ public class PestFormActivity extends AppCompatActivity {
         for (PestWeatherEnum item : weatherOptionsList) {
             listWeatherOptions.add(getString(getResources()
                                     .getIdentifier(
-                                            item.getWeather(),
+                                            "pest_form_" + item.getWeather(),
                                             "string",
                                             getPackageName()
                                     )));
@@ -135,47 +135,72 @@ public class PestFormActivity extends AppCompatActivity {
 
         editTextPopularName.requestFocus();
 
-        Toast.makeText(this, "Formulário limpo!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.pest_form_fields_clean), Toast.LENGTH_SHORT).show();
     }
 
     public void saveForm() {
         if (editTextPopularName.getText().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.popular_name_pest) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_popular_name)
+                ));
+
             editTextPopularName.requestFocus();
             return;
         }
         if (editTextScientificName.getText().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.scientific_name_pest) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_scientific_name)
+            ));
             editTextScientificName.requestFocus();
             return;
         }
         if (radioGroupPestType.getCheckedRadioButtonId() == -1) {
-            showToastFailSave("Selecione uma opção em `"+ getString(R.string.pest_type) +"`");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation_radiobutton,
+                    getString(R.string.pest_form_type)
+            ));
             radioGroupPestType.requestFocus();
             return;
         }
         if (editTextPestDescription.getText().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.pest_description) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_description)
+            ));
             editTextPestDescription.requestFocus();
             return;
         }
         if (editTextScientificName.getText().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.scientific_name_pest) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_scientific_name)
+            ));
             editTextScientificName.requestFocus();
             return;
         }
         if (!checkBoxSlow.isChecked() && !checkBoxModerate.isChecked() && !checkBoxFast.isChecked()) {
-            showToastFailSave("Selecione ao menos uma opção em `"+ getString(R.string.pest_propagation_speed) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation_checkbox,
+                    getString(R.string.pest_form_propagation_speed)
+            ));
             checkBoxSlow.requestFocus();
             return;
         }
         if (spinnerWeather.getSelectedItem().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.pest_ideal_weather_propagation) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_ideal_weather_propagation)
+            ));
             checkBoxSlow.requestFocus();
             return;
         }
         if (editTexControlMethodsDescription.getText().toString().equals("")) {
-            showToastFailSave("Campo `"+ getString(R.string.pest_control_description) +"` é obrigatório");
+            showToastFailSave(getString(
+                    R.string.pest_form_fields_validation,
+                    getString(R.string.pest_form_control_description)
+            ));
             editTextPestDescription.requestFocus();
             return;
         }

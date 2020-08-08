@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="student">Aluno: André Silva</string>
-    <string name="course">Curso: Especialização Java/UTFPR</string>
-    <string name="email">Email: andre@gmail.com</string>
-    <string name="description">Aplicativo para cadastro de plantas de jardins, pragas de jardim e registrar quais plantas foram afetadas por algum tipo de praga.</string>
-</resources>

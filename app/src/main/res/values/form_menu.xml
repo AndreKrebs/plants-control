@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="pestsAdd">Cadastrar</string>
-    <string name="about">Sobre</string>
-    <string name="context_edit">Editar</string>
-    <string name="context_delete">Deletar</string>
-</resources>

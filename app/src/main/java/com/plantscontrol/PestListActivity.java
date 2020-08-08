@@ -102,16 +102,16 @@ public class PestListActivity extends AppCompatActivity {
                 if (pest != null) {
                     pestList.add(pest);
                     adapterList.notifyDataSetChanged();
-                    showToastLong("Cadastro realizado com sucesso!");
+                    showToastLong(getString(R.string.pests_list_activityresult_successful_registration));
                 } else {
                     pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
                     pestList.set(pest.getId().intValue(), pest);
                     adapterList.notifyDataSetChanged();
-                    showToastLong("Registro atualizado com sucesso!");
+                    showToastLong(getString(R.string.pests_list_activityresult_successful_update));
                 }
 
                 if(pest == null)
-                    showToastLong("ERRO: Não foi possivel atualizar a lista");
+                    showToastLong(getString(R.string.pests_list_activityresult_error_update_list));
 
             }
         } else if(requestCode == ACTIVITY_AUTHORSHIP_REQUEST) {

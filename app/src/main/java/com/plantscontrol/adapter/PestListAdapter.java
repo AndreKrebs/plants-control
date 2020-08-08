@@ -1,7 +1,6 @@
 package com.plantscontrol.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -50,10 +49,10 @@ public class PestListAdapter extends BaseAdapter {
         TextView type = (TextView) view.findViewById(R.id.textViewCustomType);
         TextView weather = (TextView) view.findViewById(R.id.textViewCustomWeather);
 
-        popularName.setText(act.getText( R.string.popular_name_pest) + ": " + pest.getPopularName());
-        scientificName.setText(act.getText( R.string.scientific_name_pest) + ": " + pest.getScientificName());
-        type.setText(act.getText( R.string.pest_type) + ": " + pest.getType());
-        weather.setText(act.getText( R.string.pest_ideal_weather_propagation) + ": " + pest.getWeather());
+        popularName.setText(act.getText( R.string.pest_form_popular_name) + ": " + pest.getPopularName());
+        scientificName.setText(act.getText( R.string.pest_form_scientific_name) + ": " + pest.getScientificName());
+        type.setText(act.getText( R.string.pest_form_type) + ": " + pest.getType());
+        weather.setText(act.getText( R.string.pest_form_ideal_weather_propagation) + ": " + pest.getWeather());
 
         return view;
     }

@@ -1,11 +1,62 @@
 <resources>
-    <string name="main_page_title_form">Controle de plantas e pragas</string>
+    <string name="main_page_title_form">Plant and pest control</string>
 
-    <string name="app_name">Plants Control</string>
-    <string name="add_new_pest">Cadastrar praga</string>
-    <string name="list_pest">Listar pragas</string>
-    <string name="button_save">Salvar</string>
-    <string name="clean_form">Limpar formulário</string>
-    <string name="button_authorship">Autoria</string>
-    <string name="new_register">Adicionar</string>
+    <string name="app_name">Plants Control APP</string>
+    <string name="add_new_pest">Register pest</string>
+    <string name="list_pest">Lister pests</string>
+    <string name="button_save">Save</string>
+    <string name="clean_form">Clear form</string>
+    <string name="button_authorship">Authorship</string>
+    <string name="new_register">New register</string>
+
+    <!-- authorship -->
+    <string name="authorship_student">Student: André Silva</string>
+    <string name="authorship_course">Course: Specialization Java - UTFPR</string>
+    <string name="authorship_email">E-mail: andre@gmail.com</string>
+    <string name="authorship_description">Application to register garden plants, garden pests and record which plants were affected by some type of pest.</string>
+
+    <!-- menu list page pests -->
+    <string name="pests_list_page_menu_add">Register</string>
+    <string name="pests_list_page_menu_about">About</string>
+    <string name="pests_list_page_menu_context_edit">Edit</string>
+    <string name="pests_list_page_menu_context_delete">Delete</string>
+    <string name="pests_list_activityresult_successful_registration">Successful registration</string>
+    <string name="pests_list_activityresult_successful_update">Record updated successfully</string>
+    <string name="pests_list_activityresult_error_update_list">ERROR: The list could not be updated</string>
+
+    <!-- pests form-->
+    <string name="pest_form_page_title">Pest registration form</string>
+
+    <string name="pest_form_pest">Pest</string>
+    <string name="pest_form_popular_name">Popular name</string>
+    <string name="pest_form_scientific_name">Scientific name</string>
+
+    <string name="pest_form_type">Type of pest</string>
+    <string name="pest_form_type_insect">Insect</string>
+    <string name="pest_form_type_fungus">Fungus</string>
+    <string name="pest_form_type_virus">Virus</string>
+
+    <string name="pest_form_description">Pest description</string>
+    <string name="pest_form_control_description">Description of control forms</string>
+    <string name="pest_form_propagation_speed">Propagation speed</string>
+    <string name="pest_form_propagation_speed_slow">Slow</string>
+    <string name="pest_form_propagation_speed_moderate">Moderate</string>
+    <string name="pest_form_propagation_speed_fast">Fast</string>
+    <string name="pest_form_ideal_weather_propagation">Ideal climate for propagation</string>
+
+    <string name="pest_form_EQUATORIAL">Equatorial</string>
+    <string name="pest_form_TROPICAL">Tropical</string>
+    <string name="pest_form_SUBTROPICAL">Subtropical</string>
+    <string name="pest_form_DESERT">Desert</string>
+    <string name="pest_form_TEMPERATE">Temperate</string>
+    <string name="pest_form_MEDITERRANEAN">Mediterranean</string>
+    <string name="pest_form_SEMI_ARID">Semi arid</string>
+    <string name="pest_form_CONTINENTAL_ARID">Continental arid</string>
+    <string name="pest_form_MOUNTAIN_COLD">Mountain cold</string>
+    <string name="pest_form_POLAR">Polar</string>
+
+    <string name="pest_form_fields_validation">Field \'%1$s\' is required</string>
+    <string name="pest_form_fields_validation_radiobutton">Select an option in \'%1$s\'</string>
+    <string name="pest_form_fields_validation_checkbox">Select at least one option in \'%1$s\' is required</string>
+    <string name="pest_form_fields_clean">Clean form</string>
 </resources>

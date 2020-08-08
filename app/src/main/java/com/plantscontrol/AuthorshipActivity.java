@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.renderscript.Allocation;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.plantscontrol.entity.Pest;
 

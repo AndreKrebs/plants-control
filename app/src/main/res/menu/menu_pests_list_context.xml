@@ -5,11 +5,11 @@
     <item
         android:id="@+id/menuItemEdit"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/context_edit"
+        android:title="@string/pests_list_page_menu_context_edit"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/menuItemDelete"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/context_delete"
+        android:title="@string/pests_list_page_menu_context_delete"
         app:showAsAction="ifRoom|withText" />
 </menu>

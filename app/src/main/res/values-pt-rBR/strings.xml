@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_page_title_form">Controle de plantas e pragas</string>
+
+    <string name="app_name">Controle de Plantas APP</string>
+    <string name="add_new_pest">Cadastrar praga</string>
+    <string name="list_pest">Listar pragas</string>
+    <string name="button_save">Salvar</string>
+    <string name="clean_form">Limpar formulário</string>
+    <string name="button_authorship">Autoria</string>
+    <string name="new_register">Novo registro</string>
+
+    <!-- authorship -->
+    <string name="authorship_student">Aluno: André SIlva</string>
+    <string name="authorship_course">Curso: Especialização Java - UTFPR</string>
+    <string name="authorship_email">E-mail: andre@gmail.com</string>
+    <string name="authorship_description">Aplicativo para cadastro de plantas de jardins, pragas de jardim e registrar quais plantas foram afetadas por algum tipo de praga.</string>
+
+    <!-- menu list page pests -->
+    <string name="pests_list_page_menu_add">Cadastrar</string>
+    <string name="pests_list_page_menu_about">Sobre</string>
+    <string name="pests_list_page_menu_context_edit">Editar</string>
+    <string name="pests_list_page_menu_context_delete">Deletar</string>
+    <string name="pests_list_activityresult_successful_registration">Cadastro realizado com sucesso</string>
+    <string name="pests_list_activityresult_successful_update">Registro atualizado com sucesso</string>
+    <string name="pests_list_activityresult_error_update_list">ERRO: Não foi possivel atualizar a lista</string>
+
+    <!-- pests form-->
+    <string name="pest_form_page_title">Formulário cadastro de praga</string>
+
+    <string name="pest_form_pest">Praga</string>
+    <string name="pest_form_popular_name">Nome popular</string>
+    <string name="pest_form_scientific_name">Nome científico</string>
+
+    <string name="pest_form_type">Tipo de praga</string>
+    <string name="pest_form_type_insect">Inseto</string>
+    <string name="pest_form_type_fungus">Fungo</string>
+    <string name="pest_form_type_virus">Vírus</string>
+
+    <string name="pest_form_description">Descrição da praga</string>
+    <string name="pest_form_control_description">Descrição formas de controle</string>
+    <string name="pest_form_propagation_speed">Velocidade de propagação</string>
+    <string name="pest_form_propagation_speed_slow">Lenta</string>
+    <string name="pest_form_propagation_speed_moderate">Moderada</string>
+    <string name="pest_form_propagation_speed_fast">Rápida</string>
+    <string name="pest_form_ideal_weather_propagation">Clima ideal para propagação</string>
+
+    <string name="pest_form_EQUATORIAL">Equatorial</string>
+    <string name="pest_form_TROPICAL">Tropical</string>
+    <string name="pest_form_SUBTROPICAL">Subtropical</string>
+    <string name="pest_form_DESERT">Desértico</string>
+    <string name="pest_form_TEMPERATE">Temperado</string>
+    <string name="pest_form_MEDITERRANEAN">Mediterrâneo</string>
+    <string name="pest_form_SEMI_ARID">Semiárido</string>
+    <string name="pest_form_CONTINENTAL_ARID">Continental árido</string>
+    <string name="pest_form_MOUNTAIN_COLD">Frio da montanha</string>
+    <string name="pest_form_POLAR">Polar</string>
+
+    <string name="pest_form_fields_validation">Campo \'%1$s\' é obrigatório</string>
+    <string name="pest_form_fields_validation_radiobutton">Selecione uma opção em \'%1$s\'</string>
+    <string name="pest_form_fields_validation_checkbox">Selecione ao menos uma opção em \'%1$s\' é obrigatório</string>
+    <string name="pest_form_fields_clean">Formulário limpo</string>
+</resources>
