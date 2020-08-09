@@ -1,6 +1,7 @@
 package com.plantscontrol.entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Pest implements Serializable {
     private Long id;
@@ -12,25 +13,14 @@ public class Pest implements Serializable {
     private String velocity;
     private String methodsDescription;
 
-    /*public Pest(String popularName, String scientificName, String type, String weather) {
-        setPopularName(popularName);
-        setScientificName(scientificName);
-        setType(type);
-        setWeather(weather);
+    public Pest() {
     }
 
-
-    public Pest(String popularName, String scientificName, String type, String weather, String description, String velocity, String methodsDescription) {
+    public Pest(String popularName, String scientificName, String type) {
         this.popularName = popularName;
         this.scientificName = scientificName;
         this.type = type;
-        this.weather = weather;
-        this.description = description;
-        this.velocity = velocity;
-        this.methodsDescription = methodsDescription;
-    }*/
-
-    public Pest(){}
+    }
 
     public Long getId() {
         return id;
@@ -100,4 +90,5 @@ public class Pest implements Serializable {
     public String toString() {
         return "Nome: " + getPopularName() + " - " + getScientificName() + "\nTipo:" + getType() + " / Clima:" + getWeather();
     }
+
 }
