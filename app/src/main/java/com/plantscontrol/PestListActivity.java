@@ -69,10 +69,6 @@ public class PestListActivity extends AppCompatActivity {
         });
 
 
-        this.pestList.add(new Pest("aaaaaa", "cccccc", "aaaaaaa"));
-        this.pestList.add(new Pest("bbbbbb", "aaaaaa", "cccccc"));
-        this.pestList.add(new Pest("cccccc", "bbbbbb", "bbbbbb"));
-
         loadPreferences();
         orderLystPestsByField(preferenceValueOrderList);
         setAdapterList();
@@ -82,7 +78,7 @@ public class PestListActivity extends AppCompatActivity {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        // precisou ser chamado nesse método para dar tempo de criar a tela com o RadioButtons
+        // precisou ser chamado nesse método para dar tempo de criar a tela com RadioButtons
         if (hasFocus)
             setRadioButonListOrder();
 
@@ -156,10 +152,12 @@ public class PestListActivity extends AppCompatActivity {
                 if (pest != null) {
                     pestList.add(pest);
                     adapterListRefresh();
+                    orderLystPestsByField(preferenceValueOrderList);
                     showToastLong(getString(R.string.pests_list_activityresult_successful_registration));
                 } else {
                     pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
                     pestList.set(pest.getId().intValue(), pest);
+                    orderLystPestsByField(preferenceValueOrderList);
                     adapterListRefresh();
                     showToastLong(getString(R.string.pests_list_activityresult_successful_update));
                 }
@@ -217,10 +215,10 @@ public class PestListActivity extends AppCompatActivity {
 
         switch(item.getItemId()) {
             case R.id.menuItemEdit:
-                editItemPest(info.position);
+                editItemPest(info.position - 1);
                 return true;
             case R.id.menuItemDelete:
-                deleteItemPest(info.position);
+                deleteItemPest(info.position - 1);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -229,7 +227,7 @@ public class PestListActivity extends AppCompatActivity {
     }
 
     private void editItemPest(int position) {
-        Pest pest = pestList.get(position-1);
+        Pest pest = pestList.get(position);
         pest.setId((long) position);
         openFormEditPest(pest);
     }

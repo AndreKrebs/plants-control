@@ -1,7 +1,8 @@
 package com.plantscontrol.entity;
 
+import com.plantscontrol.R;
 import java.io.Serializable;
-import java.util.Comparator;
+import android.content.res.Resources;
 
 public class Pest implements Serializable {
     private Long id;
@@ -88,7 +89,9 @@ public class Pest implements Serializable {
 
     @Override
     public String toString() {
-        return "Nome: " + getPopularName() + " - " + getScientificName() + "\nTipo:" + getType() + " / Clima:" + getWeather();
+
+        return getPopularName() + " - " + getScientificName() + "\n"
+                + getType() + " / " + getWeather();
     }
 
 }

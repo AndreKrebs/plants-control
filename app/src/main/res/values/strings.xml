@@ -24,6 +24,9 @@
     <string name="pests_list_activityresult_successful_update">Record updated successfully</string>
     <string name="pests_list_activityresult_error_update_list">ERROR: The list could not be updated</string>
 
+    <!-- pests list -->
+    <string name="pests_list_sort">Sort list:</string>
+
     <!-- pests form-->
     <string name="pest_form_page_title">Pest registration form</string>
 

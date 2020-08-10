@@ -25,6 +25,9 @@
     <string name="pests_list_activityresult_successful_update">Registro atualizado com sucesso</string>
     <string name="pests_list_activityresult_error_update_list">ERRO: Não foi possivel atualizar a lista</string>
 
+    <!-- pests list -->
+    <string name="pests_list_sort">Ordenar lista:</string>
+
     <!-- pests form-->
     <string name="pest_form_page_title">Formulário cadastro de praga</string>
 

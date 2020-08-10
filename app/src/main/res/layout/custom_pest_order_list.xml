@@ -9,7 +9,7 @@
         android:id="@+id/textViewTitleOrder"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:text="Ordenar Lista"
+        android:text="@string/pests_list_sort"
         android:textStyle="bold"
         app:autoSizeTextType="uniform" />
 
@@ -28,14 +28,14 @@
             android:layout_width="153dp"
             android:layout_height="wrap_content"
             android:onClick="clickRadioButtonOrderListByField"
-            android:text="Nome popular" />
+            android:text="@string/pest_form_popular_name" />
 
         <RadioButton
             android:id="@+id/radioButtonOrderListScientificName"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:onClick="clickRadioButtonOrderListByField"
-            android:text="Nome Científico" />
+            android:text="@string/pest_form_scientific_name" />
     </RadioGroup>
 
 </LinearLayout>
