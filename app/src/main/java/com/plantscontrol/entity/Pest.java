@@ -4,14 +4,32 @@ import com.plantscontrol.R;
 import java.io.Serializable;
 import android.content.res.Resources;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Pest implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
     private Long id;
+
+    @NonNull
     private String popularName;
+
+    @NonNull
     private String scientificName;
+
+    @NonNull
     private String type;
+
     private String weather;
+
+    @NonNull
     private String description;
+
     private String velocity;
+
     private String methodsDescription;
 
     public Pest() {
