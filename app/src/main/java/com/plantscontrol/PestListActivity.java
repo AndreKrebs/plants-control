@@ -3,6 +3,8 @@ package com.plantscontrol;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SyncAdapterType;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.adapter.PestListAdapter;
+import com.plantscontrol.dao.PestDatabase;
 import com.plantscontrol.entity.Pest;
 
 import java.io.Serializable;
@@ -68,10 +71,7 @@ public class PestListActivity extends AppCompatActivity {
             }
         });
 
-
-        loadPreferences();
-        orderLystPestsByField(preferenceValueOrderList);
-        setAdapterList();
+        findAllPests();
 
         registerForContextMenu(listViewPests);
     }
@@ -79,11 +79,46 @@ public class PestListActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         // precisou ser chamado nesse método para dar tempo de criar a tela com RadioButtons
-        if (hasFocus)
-            setRadioButonListOrder();
+//        if (hasFocus)
+//            setRadioButonListOrder();
 
         super.onWindowFocusChanged(hasFocus);
     }
+
+    private void findAllPests() {
+
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                PestDatabase bla = PestDatabase.getDatabase(PestListActivity.this);
+                pestList = bla.pestDao().findAll();
+
+                loadPreferences();
+                orderLystPestsByField(preferenceValueOrderList);
+
+                PestListActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        setAdapterList();
+                        orderLystPestsByField(preferenceValueOrderList);
+                        setRadioButonListOrder();
+                    }
+                });
+            }
+        });
+    }
+
+    /*private void findAllPests() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                PestDatabase bla = PestDatabase.getDatabase(PestListActivity.this);
+                pestList = bla.pestDao().findAll();
+            }
+        });
+    }*/
 
     private void loadPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences(FILE_PREFERENCES, Context.MODE_PRIVATE);
@@ -130,7 +165,7 @@ public class PestListActivity extends AppCompatActivity {
 
     private void openFormEditPest(Pest pest) {
         Intent intent = new Intent(PestListActivity.this, PestFormActivity.class);
-        intent.putExtra(ITEM_PEST, (Serializable) pest);
+        intent.putExtra(ITEM_PEST, pest); //(Serializable) pest);
         startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
 
     }
@@ -151,14 +186,16 @@ public class PestListActivity extends AppCompatActivity {
 
                 if (pest != null) {
                     pestList.add(pest);
-                    adapterListRefresh();
-                    orderLystPestsByField(preferenceValueOrderList);
+
+                    findAllPests();
+//                    adapterListRefresh();
+//                    orderLystPestsByField(preferenceValueOrderList);
                     showToastLong(getString(R.string.pests_list_activityresult_successful_registration));
                 } else {
                     pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
-                    pestList.set(pest.getId().intValue(), pest);
-                    orderLystPestsByField(preferenceValueOrderList);
-                    adapterListRefresh();
+                    findAllPests();
+//                    orderLystPestsByField(preferenceValueOrderList);
+//                    adapterListRefresh();
                     showToastLong(getString(R.string.pests_list_activityresult_successful_update));
                 }
 
@@ -228,7 +265,6 @@ public class PestListActivity extends AppCompatActivity {
 
     private void editItemPest(int position) {
         Pest pest = pestList.get(position);
-        pest.setId((long) position);
         openFormEditPest(pest);
     }
 

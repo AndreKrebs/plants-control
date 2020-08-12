@@ -1,6 +1,7 @@
 package com.plantscontrol;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.plantscontrol.dao.PestDatabase;
 import com.plantscontrol.entity.Pest;
 import com.plantscontrol.entity.enums.PestPropagationSpeedEnum;
 import com.plantscontrol.entity.enums.PestTypeEnum;
@@ -82,6 +84,7 @@ public class PestFormActivity extends AppCompatActivity {
     }
 
     private void populateFormFromObject(Pest pest) {
+
         editTextPopularName.setText(pest.getPopularName(), TextView.BufferType.EDITABLE);
         editTextScientificName.setText(pest.getScientificName(), TextView.BufferType.EDITABLE);
         editTextPestDescription.setText(pest.getDescription());
@@ -219,19 +222,44 @@ public class PestFormActivity extends AppCompatActivity {
         pest.setPopularName(editTextPopularName.getText().toString());
         pest.setDescription(editTextPestDescription.getText().toString());
 
-        saveSuccessForm(pest);
+        returnFormAndReturnToList(pest);
     }
 
-    private void saveSuccessForm(Pest pest) {
-        Intent returnIntent = new Intent();
+    private void returnFormAndReturnToList(final Pest pest) {
 
-        if (pest.getId() != null)
-            returnIntent.putExtra(EDIT_PEST, pest);
-        else
-            returnIntent.putExtra(NEW_PEST, pest);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Long id = null;
 
-        setResult(RESULT_OK, returnIntent);
-        finish();
+                PestDatabase bla = PestDatabase.getDatabase(PestFormActivity.this);
+
+                if (pest.getId() == null) {
+                    id = bla.pestDao().insert(pest);
+                } else {
+                    bla.pestDao().update(pest);
+                    id = pest.getId();
+                }
+
+                if (id != null) {
+                    Intent returnIntent = new Intent();
+
+                    if (pest.getId() != null)
+                        returnIntent.putExtra(EDIT_PEST, pest);
+                    else
+                        returnIntent.putExtra(NEW_PEST, pest);
+
+                    setResult(RESULT_OK, returnIntent);
+                    finish();
+                } else {
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
+
+            }
+        });
+
+
     }
 
     private void showToastFailSave(String msg) {
