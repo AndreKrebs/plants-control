@@ -62,4 +62,10 @@
     <string name="pest_form_fields_validation_radiobutton">Select an option in \'%1$s\'</string>
     <string name="pest_form_fields_validation_checkbox">Select at least one option in \'%1$s\' is required</string>
     <string name="pest_form_fields_clean">Clean form</string>
+
+    <!-- texts!  -->
+    <string name="text_delete">Delete</string>
+    <string name="text_confirm_delete">Do you want to delete \'%1$s\' ?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
 </resources>

@@ -1,9 +1,9 @@
 package com.plantscontrol;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SyncAdapterType;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.adapter.PestListAdapter;
@@ -76,23 +78,12 @@ public class PestListActivity extends AppCompatActivity {
         registerForContextMenu(listViewPests);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        // precisou ser chamado nesse método para dar tempo de criar a tela com RadioButtons
-//        if (hasFocus)
-//            setRadioButonListOrder();
-
-        super.onWindowFocusChanged(hasFocus);
-    }
-
     private void findAllPests() {
-
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                PestDatabase bla = PestDatabase.getDatabase(PestListActivity.this);
-                pestList = bla.pestDao().findAll();
+                PestDatabase pestDatabase = PestDatabase.getDatabase(PestListActivity.this);
+                pestList = pestDatabase.pestDao().findAll();
 
                 loadPreferences();
                 orderLystPestsByField(preferenceValueOrderList);
@@ -100,7 +91,6 @@ public class PestListActivity extends AppCompatActivity {
                 PestListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         setAdapterList();
                         orderLystPestsByField(preferenceValueOrderList);
                         setRadioButonListOrder();
@@ -110,15 +100,24 @@ public class PestListActivity extends AppCompatActivity {
         });
     }
 
-    /*private void findAllPests() {
+    private void deleteSelectedPest(final Pest pest) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                PestDatabase bla = PestDatabase.getDatabase(PestListActivity.this);
-                pestList = bla.pestDao().findAll();
+                PestDatabase pestDatabase = PestDatabase.getDatabase(PestListActivity.this);
+                pestDatabase.pestDao().delete(pest);
+                pestList = pestDatabase.pestDao().findAll();
+
+                PestListActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setAdapterList();
+                        orderLystPestsByField(preferenceValueOrderList);
+                    }
+                });
             }
         });
-    }*/
+    }
 
     private void loadPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences(FILE_PREFERENCES, Context.MODE_PRIVATE);
@@ -165,7 +164,7 @@ public class PestListActivity extends AppCompatActivity {
 
     private void openFormEditPest(Pest pest) {
         Intent intent = new Intent(PestListActivity.this, PestFormActivity.class);
-        intent.putExtra(ITEM_PEST, pest); //(Serializable) pest);
+        intent.putExtra(ITEM_PEST, pest);
         startActivityForResult(intent, ACTIVITY_FORM_REQUEST);
 
     }
@@ -188,20 +187,15 @@ public class PestListActivity extends AppCompatActivity {
                     pestList.add(pest);
 
                     findAllPests();
-//                    adapterListRefresh();
-//                    orderLystPestsByField(preferenceValueOrderList);
                     showToastLong(getString(R.string.pests_list_activityresult_successful_registration));
                 } else {
                     pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
                     findAllPests();
-//                    orderLystPestsByField(preferenceValueOrderList);
-//                    adapterListRefresh();
                     showToastLong(getString(R.string.pests_list_activityresult_successful_update));
                 }
 
                 if(pest == null)
                     showToastLong(getString(R.string.pests_list_activityresult_error_update_list));
-
             }
         } else if(requestCode == ACTIVITY_AUTHORSHIP_REQUEST) {
             if (resultCode == RESULT_CANCELED) {
@@ -260,7 +254,6 @@ public class PestListActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
-
     }
 
     private void editItemPest(int position) {
@@ -268,9 +261,23 @@ public class PestListActivity extends AppCompatActivity {
         openFormEditPest(pest);
     }
 
-    private void deleteItemPest(int position) {
-        pestList.remove(position);
-        adapterList.notifyDataSetChanged();
+    private void deleteItemPest(final int position) {
+
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.text_delete))
+                .setMessage(getString(R.string.text_confirm_delete, pestList.get(position).getPopularName()))
+                .setPositiveButton(getString(R.string.text_yes), null)
+                .setNegativeButton(getString(R.string.text_no), null)
+                .show();
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSelectedPest(pestList.get(position));
+                dialog.dismiss();
+            }
+        });
     }
 
     private void orderLystPestsByField(final String field) {
@@ -311,7 +318,6 @@ public class PestListActivity extends AppCompatActivity {
     }
 
     private void setRadioButonListOrder() {
-
         switch (preferenceValueOrderList) {
             case FIELD_POPULAR_NAME:
                 ((RadioButton) findViewById(R.id.radioButtonOrderListPopularName)).setChecked(true);
