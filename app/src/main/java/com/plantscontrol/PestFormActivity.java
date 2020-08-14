@@ -244,11 +244,6 @@ public class PestFormActivity extends AppCompatActivity {
                 if (id != null) {
                     Intent returnIntent = new Intent();
 
-                    if (pest.getId() != null)
-                        returnIntent.putExtra(EDIT_PEST, pest);
-                    else
-                        returnIntent.putExtra(NEW_PEST, pest);
-
                     setResult(RESULT_OK, returnIntent);
                     finish();
                 } else {

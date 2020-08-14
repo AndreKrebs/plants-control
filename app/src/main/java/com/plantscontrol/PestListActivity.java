@@ -171,7 +171,6 @@ public class PestListActivity extends AppCompatActivity {
 
     public void openAuthorship() {
         Intent intent = new Intent(PestListActivity.this, AuthorshipActivity.class);
-        intent.putExtra(PEST_LIST, (Serializable) pestList);
         startActivityForResult(intent, ACTIVITY_AUTHORSHIP_REQUEST);
     }
 
@@ -181,28 +180,12 @@ public class PestListActivity extends AppCompatActivity {
 
         if (requestCode == ACTIVITY_FORM_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Pest pest = (Pest) data.getSerializableExtra(PestFormActivity.NEW_PEST);
-
-                if (pest != null) {
-                    pestList.add(pest);
-
                     findAllPests();
                     showToastLong(getString(R.string.pests_list_activityresult_successful_registration));
-                } else {
-                    pest = (Pest) data.getSerializableExtra(PestFormActivity.EDIT_PEST);
-                    findAllPests();
-                    showToastLong(getString(R.string.pests_list_activityresult_successful_update));
-                }
-
-                if(pest == null)
-                    showToastLong(getString(R.string.pests_list_activityresult_error_update_list));
             }
         } else if(requestCode == ACTIVITY_AUTHORSHIP_REQUEST) {
-            if (resultCode == RESULT_CANCELED) {
-                pestList = (List<Pest>) data.getSerializableExtra(PEST_LIST);
-                // necessário recriar adapterList pois parece que no retorno ele perde o adapter e o notifyDataSetChanged() não funciona mais
-                setAdapterList();
-            }
+            if (resultCode == RESULT_CANCELED)
+                findAllPests();
         }
     }
 

@@ -11,6 +11,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AuthorshipActivity"></activity>
         <activity android:name=".PestListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity">
+            </meta-data>
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +30,7 @@
                 android:value=".PestListActivity">
             </meta-data>
         </activity>
+
     </application>
 
 </manifest>
