@@ -9,28 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AuthorshipActivity"></activity>
-        <activity android:name=".PestListActivity" >
+        <activity android:name=".PlantListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity">
-            </meta-data>
+                android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".PlantFormActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PlantFormActivity" />
+        </activity>
+        <activity android:name=".AuthorshipActivity" />
+        <activity android:name=".PestListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PestFormActivity"
+        <activity
+            android:name=".PestFormActivity"
             android:parentActivityName=".PestListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PestListActivity">
-            </meta-data>
+                android:value=".PestListActivity" />
         </activity>
-
     </application>
 
 </manifest>

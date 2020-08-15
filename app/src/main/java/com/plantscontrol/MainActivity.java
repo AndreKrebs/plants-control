@@ -25,4 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PestListActivity.class);
         startActivity(intent);
     }
+
+    public void openListPlant(View view) {
+        Intent intent = new Intent(this, PlantListActivity.class);
+        startActivity(intent);
+    }
 }

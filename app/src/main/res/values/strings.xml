@@ -3,7 +3,11 @@
 
     <string name="app_name">Plants Control APP</string>
     <string name="add_new_pest">Register pest</string>
-    <string name="list_pest">Lister pests</string>
+    <string name="add_new_plant">Register plant</string>
+    <string name="pests_clean_form">Clean form</string>
+    <string name="list_pest">PESTS</string>
+    <string name="list_plants">PLANTS</string>
+    <string name="list_pest_in_plants">PLANTS WITH PESTS</string>
     <string name="button_save">Save</string>
     <string name="clean_form">Clear form</string>
     <string name="button_authorship">Authorship</string>
@@ -62,6 +66,11 @@
     <string name="pest_form_fields_validation_radiobutton">Select an option in \'%1$s\'</string>
     <string name="pest_form_fields_validation_checkbox">Select at least one option in \'%1$s\' is required</string>
     <string name="pest_form_fields_clean">Clean form</string>
+
+    <!-- plants form -->
+    <string name="plant_form_identification_plant_garden">Plant identification in the garden</string>
+    <string name="plant_form_popular_name">Popular name</string>
+    <string name="plant_form_scientific_name">Scientific name</string>
 
     <!-- texts!  -->
     <string name="text_delete">Delete</string>

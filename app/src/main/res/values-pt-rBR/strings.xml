@@ -4,7 +4,11 @@
 
     <string name="app_name">Controle de Plantas APP</string>
     <string name="add_new_pest">Cadastrar praga</string>
-    <string name="list_pest">Listar pragas</string>
+    <string name="add_new_plant">Cadastrar planta</string>
+    <string name="pests_clean_form">Limpar formulário</string>
+    <string name="list_pest">PRAGAS</string>
+    <string name="list_plants">PLANTAS</string>
+    <string name="list_pest_in_plants">PLANTAS COM PRAGAS</string>
     <string name="button_save">Salvar</string>
     <string name="clean_form">Limpar formulário</string>
     <string name="button_authorship">Autoria</string>
@@ -63,6 +67,11 @@
     <string name="pest_form_fields_validation_radiobutton">Selecione uma opção em \'%1$s\'</string>
     <string name="pest_form_fields_validation_checkbox">Selecione ao menos uma opção em \'%1$s\' é obrigatório</string>
     <string name="pest_form_fields_clean">Formulário limpo</string>
+
+    <!-- plants form -->
+    <string name="plant_form_identification_plant_garden">Identificação da planta no jardim</string>
+    <string name="plant_form_popular_name">Nome popular </string>
+    <string name="plant_form_scientific_name">Nome científico</string>
 
     <!-- texts!  -->
     <string name="text_delete">Excluir</string>
