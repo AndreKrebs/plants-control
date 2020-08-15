@@ -63,10 +63,10 @@
     <string name="pest_form_MOUNTAIN_COLD">Frio da montanha</string>
     <string name="pest_form_POLAR">Polar</string>
 
-    <string name="pest_form_fields_validation">Campo \'%1$s\' é obrigatório</string>
-    <string name="pest_form_fields_validation_radiobutton">Selecione uma opção em \'%1$s\'</string>
-    <string name="pest_form_fields_validation_checkbox">Selecione ao menos uma opção em \'%1$s\' é obrigatório</string>
-    <string name="pest_form_fields_clean">Formulário limpo</string>
+    <string name="text_form_fields_validation">Campo \'%1$s\' é obrigatório</string>
+    <string name="text_form_fields_validation_radiobutton">Selecione uma opção em \'%1$s\'</string>
+    <string name="text_form_fields_validation_checkbox">Selecione ao menos uma opção em \'%1$s\' é obrigatório</string>
+    <string name="text_form_fields_clean">Formulário limpo</string>
 
     <!-- plants form -->
     <string name="plant_form_identification_plant_garden">Identificação da planta no jardim</string>

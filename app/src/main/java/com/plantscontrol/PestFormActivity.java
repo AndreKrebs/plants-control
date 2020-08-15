@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.plantscontrol.dao.PestDatabase;
+import com.plantscontrol.dao.PlantPestDatabase;
 import com.plantscontrol.entity.Pest;
 import com.plantscontrol.entity.enums.PestPropagationSpeedEnum;
 import com.plantscontrol.entity.enums.PestTypeEnum;
@@ -30,9 +30,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PestFormActivity extends AppCompatActivity {
-
-    public static final String NEW_PEST = "NEW-PEST";
-    public static final String EDIT_PEST = "EDIT-PEST";
 
     private Spinner spinnerWeather;
     private RadioGroup radioGroupPestType;
@@ -138,13 +135,13 @@ public class PestFormActivity extends AppCompatActivity {
 
         editTextPopularName.requestFocus();
 
-        Toast.makeText(this, getString(R.string.pest_form_fields_clean), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.text_form_fields_clean), Toast.LENGTH_SHORT).show();
     }
 
     public void saveForm() {
         if (editTextPopularName.getText().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_popular_name)
                 ));
 
@@ -153,7 +150,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (editTextScientificName.getText().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_scientific_name)
             ));
             editTextScientificName.requestFocus();
@@ -161,7 +158,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (radioGroupPestType.getCheckedRadioButtonId() == -1) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation_radiobutton,
+                    R.string.text_form_fields_validation_radiobutton,
                     getString(R.string.pest_form_type)
             ));
             radioGroupPestType.requestFocus();
@@ -169,7 +166,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (editTextPestDescription.getText().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_description)
             ));
             editTextPestDescription.requestFocus();
@@ -177,7 +174,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (editTextScientificName.getText().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_scientific_name)
             ));
             editTextScientificName.requestFocus();
@@ -185,7 +182,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (!checkBoxSlow.isChecked() && !checkBoxModerate.isChecked() && !checkBoxFast.isChecked()) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation_checkbox,
+                    R.string.text_form_fields_validation_checkbox,
                     getString(R.string.pest_form_propagation_speed)
             ));
             checkBoxSlow.requestFocus();
@@ -193,7 +190,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (spinnerWeather.getSelectedItem().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_ideal_weather_propagation)
             ));
             checkBoxSlow.requestFocus();
@@ -201,7 +198,7 @@ public class PestFormActivity extends AppCompatActivity {
         }
         if (editTexControlMethodsDescription.getText().toString().equals("")) {
             showToastFailSave(getString(
-                    R.string.pest_form_fields_validation,
+                    R.string.text_form_fields_validation,
                     getString(R.string.pest_form_control_description)
             ));
             editTextPestDescription.requestFocus();
@@ -222,17 +219,17 @@ public class PestFormActivity extends AppCompatActivity {
         pest.setPopularName(editTextPopularName.getText().toString());
         pest.setDescription(editTextPestDescription.getText().toString());
 
-        returnFormAndReturnToList(pest);
+        saveFormAndReturnToList(pest);
     }
 
-    private void returnFormAndReturnToList(final Pest pest) {
+    private void saveFormAndReturnToList(final Pest pest) {
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 Long id = null;
 
-                PestDatabase bla = PestDatabase.getDatabase(PestFormActivity.this);
+                PlantPestDatabase bla = PlantPestDatabase.getDatabase(PestFormActivity.this);
 
                 if (pest.getId() == null) {
                     id = bla.pestDao().insert(pest);
@@ -253,8 +250,6 @@ public class PestFormActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void showToastFailSave(String msg) {
@@ -384,7 +379,7 @@ public class PestFormActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_form_pests, menu);
+        getMenuInflater().inflate(R.menu.menu_form_generic, menu);
 
         return true;
     }

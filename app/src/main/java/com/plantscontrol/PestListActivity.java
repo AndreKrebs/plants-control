@@ -23,7 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plantscontrol.adapter.PestListAdapter;
-import com.plantscontrol.dao.PestDatabase;
+import com.plantscontrol.dao.PlantPestDatabase;
 import com.plantscontrol.entity.Pest;
 
 import java.io.Serializable;
@@ -82,8 +82,8 @@ public class PestListActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                PestDatabase pestDatabase = PestDatabase.getDatabase(PestListActivity.this);
-                pestList = pestDatabase.pestDao().findAll();
+                PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PestListActivity.this);
+                pestList = plantPestDatabase.pestDao().findAll();
 
                 loadPreferences();
                 orderLystPestsByField(preferenceValueOrderList);
@@ -104,15 +104,15 @@ public class PestListActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                PestDatabase pestDatabase = PestDatabase.getDatabase(PestListActivity.this);
-                pestDatabase.pestDao().delete(pest);
-                pestList = pestDatabase.pestDao().findAll();
+                PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PestListActivity.this);
+                plantPestDatabase.pestDao().delete(pest);
+                pestList = plantPestDatabase.pestDao().findAll();
 
                 PestListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setAdapterList();
-                        orderLystPestsByField(preferenceValueOrderList);
+                    setAdapterList();
+                    orderLystPestsByField(preferenceValueOrderList);
                     }
                 });
             }
@@ -218,7 +218,7 @@ public class PestListActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.menu_pests_list_context, menu);
+        getMenuInflater().inflate(R.menu.menu_generic_list_context, menu);
     }
 
     @Override
