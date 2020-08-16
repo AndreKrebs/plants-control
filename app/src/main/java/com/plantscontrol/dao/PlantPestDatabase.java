@@ -11,12 +11,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.plantscontrol.entity.Pest;
 import com.plantscontrol.entity.Plant;
+import com.plantscontrol.entity.PlantPest;
 
-@Database(entities = {Pest.class, Plant.class}, version = 1)
+@Database(entities = {Pest.class, Plant.class, PlantPest.class}, version = 1)
 public abstract class PlantPestDatabase extends RoomDatabase {
 
     public abstract PestDao pestDao();
     public abstract PlantDao plantDao();
+    public abstract PlantPestDao plantPestDao();
 
     private static PlantPestDatabase instance;
 
