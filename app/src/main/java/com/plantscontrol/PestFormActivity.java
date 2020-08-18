@@ -193,7 +193,7 @@ public class PestFormActivity extends AppCompatActivity {
                     R.string.text_form_fields_validation,
                     getString(R.string.pest_form_ideal_weather_propagation)
             ));
-            checkBoxSlow.requestFocus();
+            spinnerWeather.requestFocus();
             return;
         }
         if (editTexControlMethodsDescription.getText().toString().equals("")) {
@@ -229,12 +229,12 @@ public class PestFormActivity extends AppCompatActivity {
             public void run() {
                 Long id = null;
 
-                PlantPestDatabase bla = PlantPestDatabase.getDatabase(PestFormActivity.this);
+                PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PestFormActivity.this);
 
                 if (pest.getId() == null) {
-                    id = bla.pestDao().insert(pest);
+                    id = plantPestDatabase.pestDao().insert(pest);
                 } else {
-                    bla.pestDao().update(pest);
+                    plantPestDatabase.pestDao().update(pest);
                     id = pest.getId();
                 }
 

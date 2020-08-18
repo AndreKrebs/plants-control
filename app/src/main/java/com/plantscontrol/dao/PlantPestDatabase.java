@@ -7,6 +7,7 @@ import androidx.room.Dao;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.plantscontrol.entity.Pest;
@@ -14,6 +15,7 @@ import com.plantscontrol.entity.Plant;
 import com.plantscontrol.entity.PlantPest;
 
 @Database(entities = {Pest.class, Plant.class, PlantPest.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class PlantPestDatabase extends RoomDatabase {
 
     public abstract PestDao pestDao();

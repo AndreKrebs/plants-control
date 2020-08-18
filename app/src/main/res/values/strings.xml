@@ -72,6 +72,17 @@
     <string name="plant_form_popular_name">Popular name</string>
     <string name="plant_form_scientific_name">Scientific name</string>
 
+    <!-- plant pest form -->
+    <string name="plant_pest_form_select_plant">Select the plant</string>
+    <string name="plant_pest_form_select_pest">Select the pest</string>
+    <string name="plant_pest_form_date_identification">Date of identification of the pest</string>
+    <string name="plant_pest_form_question_problem_resolved">The problem was resolved?</string>
+    <string name="plant_pest_form_question_problem_resolved_yes">Yes</string>
+    <string name="plant_pest_form_question_problem_resolved_no">No</string>
+    <string name="plant_pest_form_date_final_registration">Final registration date</string>
+    <string name="plant_pest_form_description_final_record">Description of the final record</string>
+
+
     <!-- texts!  -->
     <string name="text_delete">Delete</string>
     <string name="text_confirm_delete">Do you want to delete \'%1$s\' ?</string>

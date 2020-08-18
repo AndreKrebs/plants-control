@@ -73,6 +73,16 @@
     <string name="plant_form_popular_name">Nome popular </string>
     <string name="plant_form_scientific_name">Nome científico</string>
 
+    <!-- plant pest form -->
+    <string name="plant_pest_form_select_plant">Selecione a planta</string>
+    <string name="plant_pest_form_select_pest">Selecione a praga</string>
+    <string name="plant_pest_form_date_identification">Data de identificação da praga</string>
+    <string name="plant_pest_form_question_problem_resolved">O problema foi resolvido?</string>
+    <string name="plant_pest_form_question_problem_resolved_yes">Sim</string>
+    <string name="plant_pest_form_question_problem_resolved_no">Não</string>
+    <string name="plant_pest_form_date_final_registration">Data do registro final</string>
+    <string name="plant_pest_form_description_final_record">Descrição do registro final</string>
+
     <!-- texts!  -->
     <string name="text_delete">Excluir</string>
     <string name="text_confirm_delete">Deseja excluir \'%1$s\' ?</string>

@@ -23,23 +23,26 @@ public class PlantPest {
                     onDelete = RESTRICT)
     private Long plantId;
 
+    @ForeignKey
+            (entity = Pest.class,
+                    parentColumns = "id",
+                    childColumns = "pesttId",
+                    onDelete = RESTRICT)
+    private Long pestId;
+
+    private Date dateDetectedPest;
+
+    private Boolean problemResolved;
+
+    private Date dateProblemResolved;
+
+    private String descriptionResolved;
+
     public PlantPest() {}
 
     public PlantPest(Long plantId) {
         this.plantId = plantId;
     }
-
-//    private Long pestId;
-
-//    @NonNull
-//    private Date dateRegistry;
-//
-//    private Boolean problemSolved;
-//
-//    private Date dateEndProblem;
-//
-//    private String solutionDescription;
-
 
     public Long getId() {
         return id;
@@ -55,5 +58,45 @@ public class PlantPest {
 
     public void setPlantId(Long plantId) {
         this.plantId = plantId;
+    }
+
+    public Long getPestId() {
+        return pestId;
+    }
+
+    public void setPestId(Long pestId) {
+        this.pestId = pestId;
+    }
+
+    public Date getDateDetectedPest() {
+        return dateDetectedPest;
+    }
+
+    public void setDateDetectedPest(Date dateDetectedPest) {
+        this.dateDetectedPest = dateDetectedPest;
+    }
+
+    public Boolean isProblemResolved() {
+        return problemResolved;
+    }
+
+    public void setProblemResolved(Boolean problemResolved) {
+        this.problemResolved = problemResolved;
+    }
+
+    public Date getDateProblemResolved() {
+        return dateProblemResolved;
+    }
+
+    public void setDateProblemResolved(Date dateProblemResolved) {
+        this.dateProblemResolved = dateProblemResolved;
+    }
+
+    public String getDescriptionResolved() {
+        return descriptionResolved;
+    }
+
+    public void setDescriptionResolved(String descriptionResolved) {
+        this.descriptionResolved = descriptionResolved;
     }
 }
