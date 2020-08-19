@@ -26,16 +26,9 @@ public interface PlantPestDao {
     @Query("SELECT * FROM plantPest pp WHERE pp.id = :id")
     PlantPest findById(Long id);
 
-    @Query("SELECT * FROM plantPest")
-    List<PlantPest> findAll();
-
     @Query("SELECT pp.id, p1.popularName as plantPopularName, p2.popularName as pestPopularName " +
             "FROM plantPest pp INNER JOIN plant p1 ON p1.id = pp.plantId " +
             "INNER JOIN pest p2 ON p2.id = pp.pestId")
     List<PlantPestDTO> findAllPlantAndPest();
 
-    @Query("SELECT pp.id, p1.popularName as plantPopularName, p2.popularName as pestPopularName " +
-            "FROM plantPest pp INNER JOIN plant p1 ON p1.id = pp.plantId " +
-            "INNER JOIN pest p2 ON p2.id = pp.pestId WHERE pp.id = :id")
-    PlantPestDTO findPlantNameAndPestNameById(Long id);
 }

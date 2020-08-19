@@ -1,13 +1,11 @@
 package com.plantscontrol.entity;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.RESTRICT;
 
 @Entity
