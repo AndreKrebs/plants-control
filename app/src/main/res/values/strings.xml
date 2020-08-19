@@ -4,6 +4,7 @@
     <string name="app_name">Plants Control APP</string>
     <string name="add_new_pest">Register pest</string>
     <string name="add_new_plant">Register plant</string>
+    <string name="add_new_plant_pests">Register pests on plants</string>
     <string name="pests_clean_form">Clean form</string>
     <string name="list_pest">PESTS</string>
     <string name="list_plants">PLANTS</string>

@@ -26,7 +26,6 @@ import com.plantscontrol.dao.PlantPestDatabase;
 import com.plantscontrol.entity.Pest;
 import com.plantscontrol.entity.Plant;
 import com.plantscontrol.entity.PlantPest;
-import com.plantscontrol.entity.enums.PestTypeEnum;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,15 +39,21 @@ public class PlantPestFormActivity extends AppCompatActivity {
     private Spinner spinnerPlants, spinnerPests;
     private EditText editTextDateDetectedPest, editTextDateFinalRegister, editTextFinalDescription;
     private RadioGroup radioGroupResolvedQuestion;
+    private RadioButton radioButtonResolvedYes, radioButtonResolvedNo;
 
     private List<Plant> plantList = new ArrayList<>();
     private List<Pest> pestList = new ArrayList<>();
     private List<PlantPest> plantPestList = new ArrayList<>();
     private Boolean valueRadioButtonIsResolved;
 
+    List<String> optionsSpinnerPestsText = new ArrayList<>();
+    List<Long> optionsSpinnerPestsId = new ArrayList<>();
+    List<String> optionsSpinnerPlantsText = new ArrayList<>();
+    List<Long> optionsSpinnerPlantsId = new ArrayList<>();
+
     private Long selectedPlantId;
     private Long selectedPestId;
-    private Calendar calendarDatePestDetected, calendarDateFinalRegister;
+    private Calendar calendarDatePestDetected , calendarDateFinalRegister;
 
     private PlantPest editPlantPest = new PlantPest();
 
@@ -57,21 +62,80 @@ public class PlantPestFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_pest_form);
 
+        calendarDatePestDetected = Calendar.getInstance();
+        calendarDateFinalRegister = Calendar.getInstance();
+
         spinnerPlants = findViewById(R.id.spinnerPlants);
         spinnerPests = findViewById(R.id.spinnerPests);
         editTextDateDetectedPest = findViewById(R.id.editTextDateDetectedPest);
         editTextDateFinalRegister = findViewById(R.id.editTextDateFinalRegister);
         radioGroupResolvedQuestion = findViewById(R.id.radioGroupResolvedQuestion);
         editTextFinalDescription = findViewById(R.id.editTextFinalDescription);
+        radioButtonResolvedYes = findViewById(R.id.radioButtonResolvedYes);
+        radioButtonResolvedNo = findViewById(R.id.radioButtonResolvedNo);
 
-        configureSpinnerPests();
-        configureSpinnerPlants();
-        configureDateField();
+        checkExistsItemToEdit();
+    }
+
+    private void checkExistsItemToEdit() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Long id;
+        if (bundle != null) {
+            id = (Long) bundle.getSerializable(PlantPestListActivity.ITEM_PLANT_PEST_ID);
+
+            if (id != null)
+                findById(id);
+        } else {
+            configureSpinnerPests();
+            configureSpinnerPlants();
+            configureDateField();
+        }
+    }
+
+    private void findById(final Long id) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PlantPestFormActivity.this);
+                editPlantPest = plantPestDatabase.plantPestDao().findById(id);
+
+                configureSpinnerPests();
+                configureSpinnerPlants();
+
+                PlantPestFormActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        radioButtonResolvedYes.setEnabled(true);
+                        radioButtonResolvedNo.setEnabled(true);
+                        editTextDateFinalRegister.setEnabled(true);
+                        radioGroupResolvedQuestion.setEnabled(true);
+                        editTextFinalDescription.setEnabled(true);
+
+                        findViewById(R.id.textViewProblenResolved).setEnabled(true);
+                        findViewById(R.id.textViewDateFinalRegister).setEnabled(true);
+                        findViewById(R.id.textViewFinalDescription).setEnabled(true);
+
+                        editTextFinalDescription.setText(editPlantPest.getDescriptionResolved());
+
+                        if(editPlantPest.isProblemResolved() != null) {
+                            valueRadioButtonIsResolved = editPlantPest.isProblemResolved();
+                            if (editPlantPest.isProblemResolved())
+                                radioButtonResolvedYes.setChecked(true);
+                            else
+                                radioButtonResolvedNo.setChecked(true);
+                        }
+
+                        configureDateField();
+                    }
+                });
+            }
+        });
     }
 
     private void configureDateField() {
-        calendarDatePestDetected = Calendar.getInstance();
-        calendarDateFinalRegister = Calendar.getInstance();
+
 
         editTextDateDetectedPest.setFocusable(false);
         editTextDateDetectedPest.setOnClickListener(new View.OnClickListener() {
@@ -116,17 +180,27 @@ public class PlantPestFormActivity extends AppCompatActivity {
                 picker.show();
             }
         });
+
+        if (editPlantPest != null) {
+            if (editPlantPest.getDateDetectedPest() != null) {
+                calendarDatePestDetected.setTime(editPlantPest.getDateDetectedPest());
+                String textDate = formatDate(PlantPestFormActivity.this, calendarDatePestDetected.getTime());
+                editTextDateDetectedPest.setText(textDate);
+            }
+            if (editPlantPest.getDateProblemResolved() != null) {
+                calendarDateFinalRegister.setTime(editPlantPest.getDateProblemResolved());
+                String textDate = formatDate(PlantPestFormActivity.this, calendarDateFinalRegister.getTime());
+                editTextDateFinalRegister.setText(textDate);
+            }
+        }
     }
 
     private void configureSpinnerPests() {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final List<String> optionsSpinnerPestsText = new ArrayList<>();
-                final List<Long> optionsSpinnerPestsId = new ArrayList<>();
-
                 optionsSpinnerPestsText.add("");
-                optionsSpinnerPestsId.add(-1l);
+                optionsSpinnerPestsId.add(0l);
 
                 PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PlantPestFormActivity.this);
                 pestList = plantPestDatabase.pestDao().findAll();
@@ -147,6 +221,11 @@ public class PlantPestFormActivity extends AppCompatActivity {
                     public void run() {
                         spinnerPests.setAdapter(adapter);
 
+                        if (editPlantPest != null) {
+                            selectedPestId = editPlantPest.getPestId();
+                            spinnerPests.setSelection(optionsSpinnerPestsId.indexOf(selectedPestId));
+                        }
+
                         spinnerPests.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -166,15 +245,11 @@ public class PlantPestFormActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final List<String> optionsSpinnerPlantsText = new ArrayList<>();
-                final List<Long> optionsSpinnerPlantsId = new ArrayList<>();
-
                 optionsSpinnerPlantsText.add("");
                 optionsSpinnerPlantsId.add(-1l);
 
                 PlantPestDatabase plantPestDatabase = PlantPestDatabase.getDatabase(PlantPestFormActivity.this);
                 plantList = plantPestDatabase.plantDao().findAll();
-
 
                 for (Plant item : plantList) {
                     optionsSpinnerPlantsId.add(item.getId());
@@ -191,6 +266,11 @@ public class PlantPestFormActivity extends AppCompatActivity {
                     public void run() {
                     spinnerPlants.setAdapter(adapter);
 
+                        if (editPlantPest != null) {
+                            selectedPlantId= editPlantPest.getPlantId();
+                            spinnerPlants.setSelection(optionsSpinnerPlantsId.indexOf(selectedPlantId));
+                        }
+
                     spinnerPlants.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -200,6 +280,7 @@ public class PlantPestFormActivity extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> parentView) {}
                     });
+
                     }
                 });
             }
@@ -231,14 +312,19 @@ public class PlantPestFormActivity extends AppCompatActivity {
     }
 
     private void clearForm() {
-
-        // TODO: implementar ***************************
+        spinnerPlants.setSelection(0);
+        spinnerPests.setSelection(0);
+        editTextDateDetectedPest.setText("");
+        editTextDateFinalRegister.setText("");
+        editTextFinalDescription.setText("");
+        radioButtonResolvedYes.setChecked(false);
+        radioButtonResolvedNo.setChecked(false);
 
     }
 
     private void saveForm() {
         if (formIsValid()) {
-            getValuesToSave();
+            setValuesToSave();
 
             AsyncTask.execute(new Runnable() {
                 @Override
@@ -268,7 +354,7 @@ public class PlantPestFormActivity extends AppCompatActivity {
         }
     }
 
-    private void getValuesToSave() {
+    private void setValuesToSave() {
         editPlantPest.setPlantId(selectedPlantId);
         editPlantPest.setPestId(selectedPestId);
         editPlantPest.setDateDetectedPest(calendarDatePestDetected.getTime());
@@ -310,7 +396,17 @@ public class PlantPestFormActivity extends AppCompatActivity {
             return false;
         }
 
-        if (editPlantPest != null && radioGroupResolvedQuestion.getCheckedRadioButtonId() != -1) {
+        if (editPlantPest.getId() != null) {
+            if (radioGroupResolvedQuestion.getCheckedRadioButtonId() == -1) {
+                showToastFailSave(getString(
+                        R.string.text_form_fields_validation,
+                        getString(R.string.plant_pest_form_question_problem_resolved)
+                ));
+
+                editTextDateDetectedPest.requestFocus();
+                return false;
+            }
+
             if (editTextDateFinalRegister.getText().toString().equals("")) {
                 showToastFailSave(getString(
                         R.string.text_form_fields_validation,
@@ -343,13 +439,7 @@ public class PlantPestFormActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        calendarDatePestDetected.set(year, month, dayOfMonth);
 
-        String textDate = formatDate(this, calendarDatePestDetected.getTime());
-
-        editTextDateDetectedPest.setText(textDate);
-    }
 
     private static String formatDate(Context context, Date date) {
         SimpleDateFormat dateFormat;

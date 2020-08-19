@@ -46,14 +46,7 @@ public class PlantListActivity extends AppCompatActivity {
         if (plantList == null)
             plantList = new ArrayList<>();
 
-        plantList.add(new Plant(1l, "aaaa", "dddd", "hahahahaahah"));
-        plantList.add(new Plant(2l, "bbbb", "cccc", "hahahahaahah"));
-        plantList.add(new Plant(3l, "cccc", "bbbb", "hahahahaahah"));
-        plantList.add(new Plant(4l, "dddd", "aaaa", "hahahahaahah"));
-
         findAllPlants();
-
-        registerForContextMenu(listViewPlants);
     }
 
     private void findAllPlants() {

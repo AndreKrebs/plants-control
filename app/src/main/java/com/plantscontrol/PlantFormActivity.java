@@ -37,7 +37,7 @@ public class PlantFormActivity extends AppCompatActivity {
     private void checkExistsItemToEdit() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Long pestId = null;
+        Long pestId;
         if (bundle != null) {
             pestId = (Long) bundle.getSerializable(PlantListActivity.ITEM_PLANT_ID);
 

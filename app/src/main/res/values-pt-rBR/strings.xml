@@ -5,6 +5,7 @@
     <string name="app_name">Controle de Plantas APP</string>
     <string name="add_new_pest">Cadastrar praga</string>
     <string name="add_new_plant">Cadastrar planta</string>
+    <string name="add_new_plant_pests">Cadastrar pragas em plantas</string>
     <string name="pests_clean_form">Limpar formulário</string>
     <string name="list_pest">PRAGAS</string>
     <string name="list_plants">PLANTAS</string>
